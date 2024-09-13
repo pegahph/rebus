@@ -24,9 +24,12 @@ const NavbarItem: FunctionComponent<NavbarItemProps> = ({
   const t = useTranslations("navbar");
   return (
     <div
-      className={`py-2 px-4 rounded-full transition-all duration-300 cursor-pointer flex items-center gap-1 ${
+      className={`py-2 px-4 rounded-full text-white transition-all duration-300 cursor-pointer flex items-center gap-1 ${
         active ? "bg-primary-main" : ""
       } uppercase font-mickyMouse text-xl font-normal`}
+      style={{
+        WebkitTextStroke: "1px black"
+      }}
       onClick={() => onItemSelect(id)}
     >
       {t(title)}
