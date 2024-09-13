@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar/Navbar";
+import Toys from "@/components/toys/Toys";
 import { GetStaticProps } from "next";
 import localFont from "next/font/local";
 
@@ -10,9 +11,12 @@ const mickeyMouse = localFont({
 export default function Home() {
   return (
     <div
-      className={`${mickeyMouse.variable} bg-pattern1 bg-no-repeat bg-pattern1Position bg-pattern1Size h-screen w-full`}
+      className={`${mickeyMouse.variable} bg-pattern1 bg-no-repeat bg-pattern1Position bg-pattern1Size h-screen w-full `}
     >
       <Navbar />
+      <main className="flex h-full w-full justify-center items-center md:w-[987px] mx-auto">
+        <Toys />
+      </main>
     </div>
   );
 }

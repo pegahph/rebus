@@ -15,6 +15,15 @@ const config: Config = {
         primary: {
           main: "#FFC130",
         },
+        secondary: {
+          main: "#312A2A",
+        },
+        red: {
+          main: "#FF6058"
+        }
+      },
+      boxShadow: {
+        addButtonShadow: "0px 4.49px 0px 0px rgba(0, 0, 0, 0.25)",
       },
       backgroundImage: {
         pattern1: "url('/assets/bg1.svg'), url('/assets/bottombg1.svg')",
