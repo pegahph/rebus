@@ -26,19 +26,8 @@ const Toy: FunctionComponent<ToyProps> = ({ ...toy }) => {
             ${toy.cost}
           </p>
           <div className="flex items-center gap-6">
-            <button
-              className="bg-primary-main rounded-full shadow-addButtonShadow w-8 h-8 flex items-center justify-center"
-              onClick={() => {
-                addToy(toy);
-              }}
-            >
-              <PlusIcon />
-            </button>
             {getToyCount(toy.id) > 0 ? (
               <>
-                <span className="text-secondary-main text-[22px] font-black">
-                  {getToyCount(toy.id)}
-                </span>
                 <button
                   className="bg-red-main rounded-full shadow-addButtonShadow w-8 h-8 flex items-center justify-center"
                   onClick={() => {
@@ -47,8 +36,19 @@ const Toy: FunctionComponent<ToyProps> = ({ ...toy }) => {
                 >
                   <MinusIcon />
                 </button>
+                <span className="text-secondary-main text-[22px] font-black">
+                  {getToyCount(toy.id)}
+                </span>
               </>
             ) : null}
+            <button
+              className="bg-primary-main rounded-full shadow-addButtonShadow w-8 h-8 flex items-center justify-center"
+              onClick={() => {
+                addToy(toy);
+              }}
+            >
+              <PlusIcon />
+            </button>
           </div>
         </div>
       </div>
