@@ -8,3 +8,4 @@ export { ChevronDownIcon } from "./ChevronDownIcon";
 export { PlusIcon } from "./PlusIcon";
 export { MeasureIcon } from "./MeasureIcon";
 export { MinusIcon } from "./MinusIcon";
+export { DollarIcon } from "./DollarIcon";

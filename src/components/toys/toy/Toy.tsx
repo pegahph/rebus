@@ -20,7 +20,7 @@ const Toy: FunctionComponent<ToyProps> = ({ ...toy }) => {
       <div className="flex flex-col gap-3 -mt-[56px]">
         <div className="flex items-center bg-white rounded-full gap-2 w-full p-2 font-black text-base text-secondary-main">
           <MeasureIcon />
-          {toy.size}
+          {`${toy.size.x}x${toy.size.y}x${toy.size.z} ${toy.size.unit}`}
         </div>
         <div className="flex items-center justify-between w-full">
           <p className="text-secondary-main text-[22px] font-black">

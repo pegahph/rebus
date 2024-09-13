@@ -1,3 +1,9 @@
 {
-    "navbar": {}
+  "navbar": {
+    "home": "خانه",
+    "toys": "اسباب‌بازی‌ها",
+    "clothes": "لباس‌ها"
+  },
+  "packtingPrice": "هزینه بسته‌بندی",
+  "price": "قیمت"
 }

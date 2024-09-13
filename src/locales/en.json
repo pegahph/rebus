@@ -3,5 +3,7 @@
     "home": "Home",
     "toys": "toys",
     "clothes": "clothes"
-  }
+  },
+  "packtingPrice": "Packing price",
+  "price": "Price"
 }

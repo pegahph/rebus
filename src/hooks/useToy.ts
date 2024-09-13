@@ -1,11 +1,11 @@
 import { useState, useCallback, Dispatch, SetStateAction } from "react";
 
-export interface SelectedToys {
-  [id: string]: number;
+export interface SelectedToy extends Toy {
+  count: number;
 }
 
 export interface UseToyReturn {
-  selectedToys: SelectedToys;
+  selectedToys: SelectedToy[];
   addToy: (toy: Toy) => void;
   removeToy: (toyId: string) => void;
   getToyCount: (toyId: string) => number;
@@ -13,11 +13,11 @@ export interface UseToyReturn {
 }
 
 export const useToy = (
-  initialState?: SelectedToys,
-  setState?: Dispatch<SetStateAction<SelectedToys>>
+  initialState?: SelectedToy[],
+  setState?: Dispatch<SetStateAction<SelectedToy[]>>
 ): UseToyReturn => {
-  const [internalState, setInternalState] = useState<SelectedToys>(
-    initialState || {}
+  const [internalState, setInternalState] = useState<SelectedToy[]>(
+    initialState || []
   );
 
   const selectedToys = setState ? initialState! : internalState;
@@ -25,36 +25,38 @@ export const useToy = (
 
   const addToy = useCallback(
     (toy: Toy) => {
-      setSelectedToys((prev) => ({
-        ...prev,
-        [toy.id]: (prev[toy.id] || 0) + 1,
-      }));
+      setSelectedToys((prev) => {
+        const existingToyIndex = prev.findIndex((t) => t.id === toy.id);
+        if (existingToyIndex > -1) {
+          return prev.map((t, index) =>
+            index === existingToyIndex ? { ...t, count: t.count + 1 } : t
+          );
+        } else {
+          return [...prev, { ...toy, count: 1 }];
+        }
+      });
     },
     [setSelectedToys]
   );
 
   const removeToy = useCallback(
     (toyId: string) => {
-      setSelectedToys((prev) => {
-        const updatedToys = { ...prev };
-        if (updatedToys[toyId] > 1) {
-          updatedToys[toyId]--;
-        } else {
-          delete updatedToys[toyId];
-        }
-        return updatedToys;
-      });
+      setSelectedToys((prev) =>
+        prev
+          .map((t) => (t.id === toyId ? { ...t, count: t.count - 1 } : t))
+          .filter((t) => t.count > 0)
+      );
     },
     [setSelectedToys]
   );
 
   const getToyCount = useCallback(
-    (toyId: string) => selectedToys[toyId] || 0,
+    (toyId: string) => selectedToys.find((t) => t.id === toyId)?.count || 0,
     [selectedToys]
   );
 
   const getTotalCount = useCallback(
-    () => Object.values(selectedToys).reduce((sum, count) => sum + count, 0),
+    () => selectedToys.reduce((sum, toy) => sum + toy.count, 0),
     [selectedToys]
   );
 

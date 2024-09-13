@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar/Navbar";
+import Cart from "@/components/shoppingCart/Cart";
 import Toys from "@/components/toys/Toys";
 import { ToyProvider } from "@/providers/ToyProvider";
 import { GetStaticProps } from "next";
@@ -19,6 +20,7 @@ export default function Home() {
         <main className="flex h-full w-full justify-center items-center md:w-[987px] mx-auto">
           <Toys />
         </main>
+        <Cart />
       </ToyProvider>
     </div>
   );
