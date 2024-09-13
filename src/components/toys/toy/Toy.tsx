@@ -1,13 +1,14 @@
 import { MeasureIcon, MinusIcon, PlusIcon } from "@/components/icons";
-import { useToy } from "@/hooks/useToy";
+import { ToyContext } from "@/providers/ToyProvider";
 import Image from "next/image";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 
 interface ToyProps extends Toy {}
 
 const Toy: FunctionComponent<ToyProps> = ({ ...toy }) => {
-  const { addToy, removeToy, getToyCount } = useToy();
-
+  const context = useContext(ToyContext);
+  if (!context) throw new Error("Toy must be used within a ToyProvider");
+  const { addToy, removeToy, getToyCount } = context;
   return (
     <div className="relative rounded-[18px] bg-white bg-opacity-70 p-3 flex flex-col justify-between gap-3">
       <div className="flex flex-col gap-3 -translate-y-[56px]">

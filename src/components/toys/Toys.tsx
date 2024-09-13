@@ -2,9 +2,7 @@ import { toys } from "@/enums/toys";
 import { FunctionComponent } from "react";
 import Toy from "./toy/Toy";
 
-interface ToysProps {
-
-}
+interface ToysProps {}
 
 const Toys: FunctionComponent<ToysProps> = () => {
   return (

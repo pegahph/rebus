@@ -1,36 +1,52 @@
-import { useCallback, useState } from "react";
+import { useState, useCallback, Dispatch, SetStateAction } from "react";
 
-interface UseToySelectionReturn {
-  selectedToys: { [id: string]: number };
+export interface SelectedToys {
+  [id: string]: number;
+}
+
+export interface UseToyReturn {
+  selectedToys: SelectedToys;
   addToy: (toy: Toy) => void;
   removeToy: (toyId: string) => void;
   getToyCount: (toyId: string) => number;
   getTotalCount: () => number;
 }
 
-export const useToy = (): UseToySelectionReturn => {
-  const [selectedToys, setSelectedToys] = useState<{ [id: string]: number }>(
-    {}
+export const useToy = (
+  initialState?: SelectedToys,
+  setState?: Dispatch<SetStateAction<SelectedToys>>
+): UseToyReturn => {
+  const [internalState, setInternalState] = useState<SelectedToys>(
+    initialState || {}
   );
 
-  const addToy = useCallback((toy: Toy) => {
-    setSelectedToys((prev) => ({
-      ...prev,
-      [toy.id]: (prev[toy.id] || 0) + 1,
-    }));
-  }, []);
+  const selectedToys = setState ? initialState! : internalState;
+  const setSelectedToys = setState || setInternalState;
 
-  const removeToy = useCallback((toyId: string) => {
-    setSelectedToys((prev) => {
-      const updatedToys = { ...prev };
-      if (updatedToys[toyId] > 1) {
-        updatedToys[toyId]--;
-      } else {
-        delete updatedToys[toyId];
-      }
-      return updatedToys;
-    });
-  }, []);
+  const addToy = useCallback(
+    (toy: Toy) => {
+      setSelectedToys((prev) => ({
+        ...prev,
+        [toy.id]: (prev[toy.id] || 0) + 1,
+      }));
+    },
+    [setSelectedToys]
+  );
+
+  const removeToy = useCallback(
+    (toyId: string) => {
+      setSelectedToys((prev) => {
+        const updatedToys = { ...prev };
+        if (updatedToys[toyId] > 1) {
+          updatedToys[toyId]--;
+        } else {
+          delete updatedToys[toyId];
+        }
+        return updatedToys;
+      });
+    },
+    [setSelectedToys]
+  );
 
   const getToyCount = useCallback(
     (toyId: string) => selectedToys[toyId] || 0,

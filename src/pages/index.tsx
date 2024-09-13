@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar/Navbar";
 import Toys from "@/components/toys/Toys";
+import { ToyProvider } from "@/providers/ToyProvider";
 import { GetStaticProps } from "next";
 import localFont from "next/font/local";
 
@@ -13,10 +14,12 @@ export default function Home() {
     <div
       className={`${mickeyMouse.variable} bg-pattern1 bg-no-repeat bg-pattern1Position bg-pattern1Size h-screen w-full `}
     >
-      <Navbar />
-      <main className="flex h-full w-full justify-center items-center md:w-[987px] mx-auto">
-        <Toys />
-      </main>
+      <ToyProvider>
+        <Navbar />
+        <main className="flex h-full w-full justify-center items-center md:w-[987px] mx-auto">
+          <Toys />
+        </main>
+      </ToyProvider>
     </div>
   );
 }
